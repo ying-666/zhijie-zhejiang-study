@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { computed, onMounted, ref } from 'vue'
-import { byId, lessonsFor, purposeLabel, questionById, questions, skillUrl, subjects } from '../../data/catalog.ts'
+import { byId, activeSubjects, lessonsFor, purposeLabel, questionById, questions, skillUrl } from '../../data/catalog.ts'
 import type { Attempt, Purpose } from '../../data/types.ts'
 import Formula from './Formula.vue'
 import { useProgress } from './state.ts'
@@ -17,7 +17,7 @@ const submitted = ref(false)
 const { record } = useProgress()
 const purposes = Object.keys(purposeLabel) as Purpose[]
 const reasons = ['概念或词义不清', '漏读条件', '方法选择不当', '计算或操作失误', '时间不足', '原因不确定']
-const scopes = subjects.filter(subject => subject.focus)
+const scopes = activeSubjects.filter(subject => lessonsFor(subject.id).length > 0)
 const filtered = computed(() => {
   const ids = new Set(lessonsFor(scope.value).map(node => node.id))
   return questions.filter(question => question.purpose === purpose.value && question.skills.some(id => ids.has(id)))

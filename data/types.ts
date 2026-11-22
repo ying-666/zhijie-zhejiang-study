@@ -23,6 +23,7 @@ export interface GuideExercise {
 }
 export interface Guide extends Node {
   kind: '知识点' | '英语题型' | '训练建议'
+  course?: string
   points: string[]
   example?: GuideExercise
   check?: GuideExercise

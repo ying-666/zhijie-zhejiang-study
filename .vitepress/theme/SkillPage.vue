@@ -39,7 +39,7 @@ onMounted(() => {
     <span aria-current="page">{{ node.name }}</span>
   </nav>
   <div class="page-head">
-    <div class="eyeline"><span></span>{{ guide?.kind ?? (lesson ? '专项课程' : node.planned ? '分类规划' : '学习目录') }}</div>
+    <div class="eyeline"><span></span>{{ guide?.course ?? guide?.kind ?? (lesson ? '专项课程' : node.planned ? '分类规划' : '学习目录') }}</div>
     <h1>{{ node.name }}</h1>
     <p class="lede"><Formula :text="node.definition" /></p>
   </div>

@@ -9,11 +9,19 @@ import discourse from './discourse-units.ts'
 import inference from './inference-units.ts'
 import { mathGuides } from './math-guides.ts'
 import { englishGuides } from './english-guides.ts'
+import { mathLectureGuides } from './math-lecture-guides.ts'
+import { physicsMechanics } from './physics-mechanics.ts'
+import { physicsElectricity } from './physics-electricity.ts'
+import { physicsModern } from './physics-modern.ts'
+import { physicsExperiments } from './physics-experiments.ts'
 
 const units = [...algebra, ...equations, ...functions, ...vocabulary, ...discourse, ...inference]
 export { activeSubjects, entities, subjects }
-export const guides = new Map<string, Guide>([...mathGuides, ...englishGuides].map(guide => [guide.id, guide]))
-const reassignedParents: Record<string, string> = { square: 'math-prep', 'main-idea': 'en-main-idea' }
+export const guides = new Map<string, Guide>([
+  ...mathGuides, ...mathLectureGuides, ...englishGuides,
+  ...physicsMechanics, ...physicsElectricity, ...physicsModern, ...physicsExperiments,
+].map(guide => [guide.id, guide]))
+const reassignedParents: Record<string, string> = { square: 'math-prep', trig: 'math-trig-tools', 'main-idea': 'en-main-idea' }
 export const nodes: Node[] = [
   ...groupsAndPlanned,
   ...outlineNodes,

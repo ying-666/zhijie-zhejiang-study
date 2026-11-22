@@ -3,6 +3,7 @@ import katex from 'katex'
 import { activeSubjects, byId, childrenOf, entities, entityById, guides, lessons, lessonsFor, nodes, questions, relatedSkills, subjects } from '../data/catalog.ts'
 import type { Kind, Purpose } from '../data/types.ts'
 import { wordBank } from '../data/word-bank.ts'
+import { mathLectureOrder } from '../data/study-outline.ts'
 
 function unique(values: string[], title: string) {
   assert.equal(new Set(values).size, values.length, title + '出现重复 ID')
@@ -59,10 +60,18 @@ for (const guide of guides.values()) {
     if (example.audioText) validateText(example.audioText, guide.id)
   }
 }
-assert.deepEqual(activeSubjects.map(subject => subject.id), ['math', 'english'])
+assert.deepEqual(activeSubjects.map(subject => subject.id), ['math', 'english', 'physics'])
 assert.deepEqual(childrenOf('math').map(node => node.id), ['math-curriculum', 'calculation', 'math-exam'])
 assert.deepEqual(childrenOf('english').map(node => node.id), ['en-listen', 'reading', 'en-gap-fill', 'en-cloze', 'en-language', 'en-write', 'en-continuation'])
 assert(childrenOf('math-curriculum').every(node => childrenOf(node.id).length > 0))
+for (const phase of mathLectureOrder) {
+  for (const topic of phase.topics) assert.equal(byId.get(topic.id)?.subject, 'math', topic.id + '专题入口无效')
+}
+assert.deepEqual(childrenOf('physics').map(node => node.id), ['physics-mechanics', 'physics-electricity', 'physics-modern', 'physics-experiments'])
+for (const topic of childrenOf('physics')) {
+  assert(childrenOf(topic.id).length >= 4, topic.id + '缺少章节内容')
+  for (const node of childrenOf(topic.id)) assert(guides.get(node.id)?.course, node.id + '缺少课标模块')
+}
 assert.equal(new Set(wordBank.map(entry => entry.word)).size, wordBank.length, '词汇卡存在重复')
 for (const entry of wordBank) for (const text of Object.values(entry)) validateText(text, entry.word)
 for (const [id, lesson] of lessons) {

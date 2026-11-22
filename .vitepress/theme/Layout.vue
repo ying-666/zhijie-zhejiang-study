@@ -11,7 +11,8 @@ import GraphPage from './GraphPage.vue'
 import TrainingPage from './TrainingPage.vue'
 import ProgressPage from './ProgressPage.vue'
 import WordsPage from './WordsPage.vue'
-import { zhejiangEnglishReview } from '../../data/sources.ts'
+import { physicsCurriculum, zhejiangEnglishReview, zhejiangPhysicsReview } from '../../data/sources.ts'
+import { mathLectureOrder } from '../../data/study-outline.ts'
 
 const { page, frontmatter } = useData()
 const route = useRoute()
@@ -78,8 +79,17 @@ const topics = [
           <nav class="breadcrumbs" aria-label="面包屑"><a href="/subjects/">学科导航</a><span aria-current="page">{{ subject.name }}</span></nav>
           <div class="page-head"><h1>{{ subject.name }}</h1><p class="lede">{{ subject.focus ?? '浏览本学科的能力分类和教材模块索引。' }}</p><div class="tag-row"><span v-for="track in subject.tracks" :key="track">{{ track }}</span></div></div>
           <template v-if="subject.focus">
-            <h2 class="section-title">{{ subject.id === 'math' ? '学习路径' : '按题型学习' }}</h2>
+            <h2 class="section-title">{{ subject.id === 'english' ? '按题型学习' : '学习路径' }}</h2>
             <div class="subject-paths" :class="{ 'english-paths': subject.id === 'english' }"><a v-for="node in childrenOf(subject.id)" :key="node.id" :href="skillUrl(node.id)"><strong>{{ node.name }}</strong><span>{{ node.definition }}</span></a></div>
+            <section v-if="subject.id === 'math'">
+              <h2 class="section-title">按讲义专题复习</h2>
+              <p class="quiet">参考赵礼显讲义的专题顺序。每个入口直达本站的知识点讲解、例题或自查题。</p>
+              <div v-for="phase in mathLectureOrder" :key="phase.title" class="relation-row lecture-row">
+                <strong>{{ phase.title }}</strong>
+                <div class="link-pills"><a v-for="topic in phase.topics" :key="topic.id" :href="skillUrl(topic.id)">{{ topic.name }}</a></div>
+              </div>
+            </section>
+            <p v-if="subject.id === 'physics'" class="quiet section-title">专题顺序参考夏梦迪讲义，知识点标注课标模块。<a :href="physicsCurriculum">查看物理课标</a> · <a :href="zhejiangPhysicsReview">查看浙江选考命题思路</a></p>
             <template v-if="subject.id === 'english'">
               <h2 class="section-title">词汇</h2>
               <div class="branch-list"><a href="/words/"><strong>课标词汇与拓展</strong><span>按主题查词义、搭配和例句，随时切换自测。</span></a></div>
@@ -94,11 +104,12 @@ const topics = [
           </template>
         </template>
         <template v-else-if="kind === 'subjects' || kind === 'library'">
-          <div class="page-head"><h1>{{ kind === 'library' ? '学科知识库' : '学科导航' }}</h1><p class="lede">数学按课标知识点学，英语按题型练。</p></div>
+          <div class="page-head"><h1>{{ kind === 'library' ? '学科知识库' : '学科导航' }}</h1><p class="lede">数学和物理按知识点学，英语按题型练。</p></div>
           <SubjectGrid v-if="kind === 'subjects'" />
           <template v-else>
             <div class="subject-paths">
               <a href="/skills/math-curriculum.html"><strong>数学课标知识点</strong><span>必修与选择性必修的核心概念、例题和自查题。</span></a>
+              <a href="/subjects/physics.html"><strong>物理专题</strong><span>力学、电磁学、热光波与近代物理、实验。</span></a>
               <a href="/subjects/english.html"><strong>英语题型</strong><span>听力、阅读、七选五、完形填空、语法填空和两类写作。</span></a>
               <a href="/words/"><strong>英语课标词汇与拓展</strong><span>查词、按主题筛选和回想词义。</span></a>
               <a href="/network/"><strong>知识关联图谱</strong><span>查看知识、能力、方法与题型的联系。</span></a>
