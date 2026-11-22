@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { computed, ref } from 'vue'
-import { byId, questionById, skillUrl } from '../../data/catalog.ts'
+import { byId, lessons, questionById, skillUrl } from '../../data/catalog.ts'
 import Formula from './Formula.vue'
 import { useProgress } from './state.ts'
 const { state, storageWarning, toggle } = useProgress()
@@ -62,7 +62,7 @@ const retests = computed(() => {
     <div v-else class="result-row" v-for="id in entries" :key="id">
       <a :href="skillUrl(id)">{{ byId.get(id)?.name }}</a>
       <button v-if="view === 'favorites'" class="text-button" @click="toggle('favorites', id)">取消收藏</button>
-      <a v-else :href="'/training/?scope=' + id + '&purpose=retest'">新题复测</a>
+      <a v-else-if="lessons.has(id)" :href="'/training/?scope=' + id + '&purpose=retest'">新题复测</a>
     </div>
     <section v-if="view === 'read' && retests.length">
       <h2 class="section-title">独立复测记录</h2>

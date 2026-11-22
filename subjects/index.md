@@ -1,4 +1,4 @@
 ---
 pageKind: subjects
-title: 能力导航
+title: 学科导航
 ---

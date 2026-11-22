@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { computed, onMounted, ref } from 'vue'
 import { useData, useRoute, Content } from 'vitepress'
-import { byId, childrenOf, lessons, lessonsFor, lineage, skillUrl, subjects, subjectUrl } from '../../data/catalog.ts'
+import { byId, childrenOf, lineage, skillUrl, subjects, subjectUrl } from '../../data/catalog.ts'
 import SearchBox from './SearchBox.vue'
 import HomePage from './HomePage.vue'
 import SubjectGrid from './SubjectGrid.vue'
@@ -10,16 +10,18 @@ import SkillPage from './SkillPage.vue'
 import GraphPage from './GraphPage.vue'
 import TrainingPage from './TrainingPage.vue'
 import ProgressPage from './ProgressPage.vue'
+import WordsPage from './WordsPage.vue'
+import { zhejiangEnglishReview } from '../../data/sources.ts'
 
 const { page, frontmatter } = useData()
 const route = useRoute()
 const kind = computed(() => frontmatter.value.pageKind as string | undefined)
 const id = computed(() => String(page.value.params?.id ?? ''))
 const subject = computed(() => subjects.find(subject => subject.id === (kind.value === 'subject' ? id.value : byId.get(id.value)?.subject)))
-const trail = computed(() => kind.value === 'skill' ? lineage(id.value).map(node => node.id) : subject.value?.id === 'math' ? ['calculation'] : subject.value?.id === 'english' ? ['reading'] : [])
+const trail = computed(() => kind.value === 'skill' ? lineage(id.value).map(node => node.id) : subject.value?.id === 'math' ? ['math-curriculum'] : subject.value?.id === 'english' ? ['reading'] : [])
 const reading = computed(() => !!subject.value)
 const nav = [
-  { href: '/subjects/', name: '能力导航', types: ['subjects','subject','skill'] },
+  { href: '/subjects/', name: '学科导航', types: ['subjects','subject','skill','words'] },
   { href: '/library/', name: '知识库', types: ['library'] },
   { href: '/training/', name: '能力训练', types: ['training'] },
   { href: '/review/', name: '高考专题', types: ['review'] },
@@ -58,11 +60,12 @@ const topics = [
   <main id="main" tabindex="-1">
     <HomePage v-if="kind === 'home'" />
     <div v-else class="wrap page-shell" :class="{ 'with-sidebar': reading }">
-      <aside v-if="subject" class="reader-side" aria-label="学科能力树">
-        <details class="mobile-outline"><summary>{{ subject.name }}能力树</summary><ul class="tree-list"><TreeItem v-for="node in childrenOf(subject.id)" :key="node.id" :node="node" :active="id" :trail="trail" /></ul></details>
+      <aside v-if="subject" class="reader-side" aria-label="学科学习目录">
+        <details class="mobile-outline"><summary>{{ subject.name }}学习目录</summary><ul class="tree-list"><TreeItem v-for="node in childrenOf(subject.id)" :key="node.id" :node="node" :active="id" :trail="trail" /></ul></details>
         <div class="desktop-outline"><a class="side-title" :href="subjectUrl(subject.id)"><span class="subject-icon" :class="subject.id">{{ subject.mark }}</span><strong>{{ subject.name }}</strong></a>
           <ul class="tree-list"><TreeItem v-for="node in childrenOf(subject.id)" :key="node.id" :node="node" :active="id" :trail="trail" /></ul>
-          <a class="side-link" href="/subjects/">全部学科</a>
+          <a v-if="subject.id === 'english'" class="side-link" href="/words/">课标词汇与拓展</a>
+          <a class="side-link" href="/subjects/">学科导航</a>
         </div>
       </aside>
       <div class="page-content" :key="route.path">
@@ -70,27 +73,37 @@ const topics = [
         <GraphPage v-else-if="kind === 'network' || kind === 'entity'" :id="kind === 'entity' ? id : undefined" />
         <TrainingPage v-else-if="kind === 'training'" />
         <ProgressPage v-else-if="kind === 'progress'" />
+        <WordsPage v-else-if="kind === 'words'" />
         <template v-else-if="kind === 'subject' && subject">
-          <nav class="breadcrumbs" aria-label="面包屑"><a href="/subjects/">能力导航</a><span aria-current="page">{{ subject.name }}</span></nav>
+          <nav class="breadcrumbs" aria-label="面包屑"><a href="/subjects/">学科导航</a><span aria-current="page">{{ subject.name }}</span></nav>
           <div class="page-head"><h1>{{ subject.name }}</h1><p class="lede">{{ subject.focus ?? '浏览本学科的能力分类和教材模块索引。' }}</p><div class="tag-row"><span v-for="track in subject.tracks" :key="track">{{ track }}</span></div></div>
-          <div class="button-row" v-if="subject.focus"><a class="button primary" :href="'/training/?scope=' + subject.id + '&purpose=diagnosis'">从学科诊断开始</a><a class="button" href="/review/">查看考试依据</a></div>
-          <p v-else class="empty">能力分类规划已上线，课程和训练题仍在编写。</p>
-          <h2 class="section-title">核心能力</h2>
-          <div class="branch-list"><a v-for="node in childrenOf(subject.id)" :key="node.id" :href="skillUrl(node.id)"><strong>{{ node.name }}</strong><span>{{ node.definition }} · {{ node.planned ? '规划中' : lessonsFor(node.id).length + ' 节课程' }}</span></a></div>
-          <h2 class="section-title">教材模块索引</h2><p class="quiet">按学习主题整理。用书版本和年度考试依据见 <a href="/review/">高考专题</a>。</p>
-          <div class="tag-row"><span v-for="module in subject.modules" :key="module">{{ module }}</span></div>
+          <template v-if="subject.focus">
+            <h2 class="section-title">{{ subject.id === 'math' ? '学习路径' : '按题型学习' }}</h2>
+            <div class="subject-paths" :class="{ 'english-paths': subject.id === 'english' }"><a v-for="node in childrenOf(subject.id)" :key="node.id" :href="skillUrl(node.id)"><strong>{{ node.name }}</strong><span>{{ node.definition }}</span></a></div>
+            <template v-if="subject.id === 'english'">
+              <h2 class="section-title">词汇</h2>
+              <div class="branch-list"><a href="/words/"><strong>课标词汇与拓展</strong><span>按主题查词义、搭配和例句，随时切换自测。</span></a></div>
+              <p class="quiet section-title">题型目录参照 <a :href="zhejiangEnglishReview">2026 年 1 月浙江英语试题评析</a>，按学习任务组织。</p>
+            </template>
+          </template>
+          <template v-else>
+            <p class="empty">课程和训练题仍在规划。</p>
+            <div class="branch-list"><a v-for="node in childrenOf(subject.id)" :key="node.id" :href="skillUrl(node.id)"><strong>{{ node.name }}</strong><span>{{ node.definition }}</span></a></div>
+            <h2 class="section-title">教材模块索引</h2>
+            <div class="tag-row"><span v-for="module in subject.modules" :key="module">{{ module }}</span></div>
+          </template>
         </template>
         <template v-else-if="kind === 'subjects' || kind === 'library'">
-          <div class="page-head"><div class="eyeline"><span></span>{{ kind === 'library' ? '知识库' : '能力精准突破' }}</div><h1>{{ kind === 'library' ? '学科知识库' : '能力导航' }}</h1><p class="lede">{{ kind === 'library' ? '每节上线课程包含基础、原理、例题、练习与高考速查。' : '进入学科，沿着能力树定位到需要学习和检测的具体环节。' }}</p></div>
-          <template v-if="kind === 'library'">
-            <div class="button-row"><a class="button primary" href="/network/">浏览关联图谱</a><a class="button" href="/review/">高考速查专题</a></div>
-            <section v-for="subjectItem in subjects.filter(item => item.focus)" :key="subjectItem.id" class="library-list">
-              <h2 class="section-title">{{ subjectItem.name }} <span class="quiet">{{ lessonsFor(subjectItem.id).length }} 节课程</span></h2>
-              <div class="link-pills"><a v-for="node in lessonsFor(subjectItem.id)" :key="node.id" :href="skillUrl(node.id)">{{ node.name }}</a></div>
-            </section>
-            <h2 class="section-title">全部学科</h2>
+          <div class="page-head"><h1>{{ kind === 'library' ? '学科知识库' : '学科导航' }}</h1><p class="lede">数学按课标知识点学，英语按题型练。</p></div>
+          <SubjectGrid v-if="kind === 'subjects'" />
+          <template v-else>
+            <div class="subject-paths">
+              <a href="/skills/math-curriculum.html"><strong>数学课标知识点</strong><span>必修与选择性必修的核心概念、例题和自查题。</span></a>
+              <a href="/subjects/english.html"><strong>英语题型</strong><span>听力、阅读、七选五、完形填空、语法填空和两类写作。</span></a>
+              <a href="/words/"><strong>英语课标词汇与拓展</strong><span>查词、按主题筛选和回想词义。</span></a>
+              <a href="/network/"><strong>知识关联图谱</strong><span>查看知识、能力、方法与题型的联系。</span></a>
+            </div>
           </template>
-          <SubjectGrid />
         </template>
         <template v-else-if="kind === 'review'">
           <div class="page-head"><div class="eyeline"><span></span>浙江备考</div><h1>浙江高考专题复习</h1><p class="lede">按专题复习方法，进入综合题，并对照年度考试依据。</p></div>

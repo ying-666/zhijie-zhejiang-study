@@ -16,6 +16,18 @@ export interface Node {
   definition: string
   planned?: boolean
 }
+export interface GuideExercise {
+  prompt: string
+  answer: string
+  audioText?: string
+}
+export interface Guide extends Node {
+  kind: '知识点' | '英语题型' | '训练建议'
+  points: string[]
+  example?: GuideExercise
+  check?: GuideExercise
+}
+
 export interface Entity {
   id: string
   kind: Kind

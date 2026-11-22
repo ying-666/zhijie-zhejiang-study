@@ -13,7 +13,7 @@ const open = computed(() => props.trail.includes(props.node.id))
     <details v-if="children.length" :open="open">
       <summary><span class="tree-chevron" aria-hidden="true"></span>{{ node.name }}</summary>
       <ul class="tree-list nested">
-        <li><a :href="skillUrl(node.id)" :aria-current="active === node.id ? 'page' : undefined">能力概览</a></li>
+        <li><a :href="skillUrl(node.id)" :aria-current="active === node.id ? 'page' : undefined">进入目录</a></li>
         <TreeItem v-for="child in children" :key="child.id" :node="child" :active="active" :trail="trail" />
       </ul>
     </details>

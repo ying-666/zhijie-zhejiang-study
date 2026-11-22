@@ -1,7 +1,8 @@
 import assert from 'node:assert/strict'
 import katex from 'katex'
-import { byId, childrenOf, entities, entityById, lessons, lessonsFor, nodes, questions, relatedSkills, subjects } from '../data/catalog.ts'
+import { activeSubjects, byId, childrenOf, entities, entityById, guides, lessons, lessonsFor, nodes, questions, relatedSkills, subjects } from '../data/catalog.ts'
 import type { Kind, Purpose } from '../data/types.ts'
+import { wordBank } from '../data/word-bank.ts'
 
 function unique(values: string[], title: string) {
   assert.equal(new Set(values).size, values.length, title + '出现重复 ID')
@@ -44,8 +45,26 @@ for (const node of nodes) {
     assert(ancestor && ancestor.subject === node.subject, node.id + '父节点无效')
     parent = ancestor.parent
   }
-  assert(node.planned || lessons.has(node.id) || childrenOf(node.id).length, node.id + '正式节点缺少课程或子能力')
+  assert(node.planned || guides.has(node.id) || lessons.has(node.id) || childrenOf(node.id).length, node.id + '正式节点缺少课程或子能力')
 }
+for (const guide of guides.values()) {
+  assert(guide.points.length >= 2, guide.id + '缺少讲解')
+  if (guide.kind !== '训练建议') assert(guide.example, guide.id + '缺少例题')
+  if (guide.kind === '知识点') assert(guide.check && guide.parent, guide.id + '缺少自查题或上级目录')
+  for (const point of guide.points) validateText(point, guide.id)
+  for (const example of [guide.example, guide.check]) {
+    if (!example) continue
+    validateText(example.prompt, guide.id)
+    validateText(example.answer, guide.id)
+    if (example.audioText) validateText(example.audioText, guide.id)
+  }
+}
+assert.deepEqual(activeSubjects.map(subject => subject.id), ['math', 'english'])
+assert.deepEqual(childrenOf('math').map(node => node.id), ['math-curriculum', 'calculation', 'math-exam'])
+assert.deepEqual(childrenOf('english').map(node => node.id), ['en-listen', 'reading', 'en-gap-fill', 'en-cloze', 'en-language', 'en-write', 'en-continuation'])
+assert(childrenOf('math-curriculum').every(node => childrenOf(node.id).length > 0))
+assert.equal(new Set(wordBank.map(entry => entry.word)).size, wordBank.length, '词汇卡存在重复')
+for (const entry of wordBank) for (const text of Object.values(entry)) validateText(text, entry.word)
 for (const [id, lesson] of lessons) {
   assert(childrenOf(id).length === 0, id + '原子能力不能包含子节点')
   assert(lesson.source && lesson.review, id + '缺少来源或审核状态')
@@ -71,4 +90,4 @@ for (const [id, lesson] of lessons) {
 }
 for (const item of entities) assert(relatedSkills(item).length, item.id + '没有关联能力')
 for (const id of ['math', 'english']) assert(lessonsFor(id).length >= 12, id + '示范内容不足')
-console.log(subjects.length + ' 门学科 · ' + nodes.length + ' 个能力节点 · ' + lessons.size + ' 节课程 · ' + entities.length + ' 个关联条目 · ' + questions.length + ' 道题')
+console.log(subjects.length + ' 门学科 · ' + nodes.length + ' 个能力节点 · ' + lessons.size + ' 节课程 · ' + entities.length + ' 个关联条目 · ' + questions.length + ' 道题 · ' + guides.size + ' 篇讲解与指南 · ' + wordBank.length + ' 张词汇卡')

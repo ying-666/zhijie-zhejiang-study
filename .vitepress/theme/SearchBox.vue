@@ -1,25 +1,27 @@
 <script setup lang="ts">
 import { computed, nextTick, onMounted, onUnmounted, ref } from 'vue'
-import { entities, entityUrl, kindLabel, lessons, lineage, nodes, skillUrl, subjectUrl, subjects } from '../../data/catalog.ts'
+import { activeSubjects, entities, entityUrl, guides, kindLabel, lessons, lineage, nodes, skillUrl, subjectUrl } from '../../data/catalog.ts'
 
 const pages = [
+  { title: '英语课标词汇与拓展', url: '/words/', label: '词汇', text: '3500 3100 单词 词汇表 背单词 自测 新课标' },
   { title: '学科知识库', url: '/library/', label: '入口', text: '完整学习模式 高考速查' },
   { title: '浙江高考专题复习', url: '/review/', label: '专题', text: '浙江选考 学考 高考 政策 教材 2026 2027' },
   { title: '能力训练', url: '/training/', label: '入口', text: '诊断 专项 复测 综合' },
   { title: '我的学习', url: '/progress/', label: '入口', text: '收藏 错题 进度' },
 ]
-const aliases: Record<string, string> = { insertion: '长难句 插入语', 'word-context': '生词 词义推断', factor: '因式化 分解', 'root-signs': '韦达定理' }
-const subjectNames = new Map(subjects.map(subject => [subject.id, subject.name]))
+const aliases: Record<string, string> = { insertion: '长难句 插入语', 'word-context': '生词 词义推断', factor: '因式化 分解', 'root-signs': '韦达定理', 'math-definition': '函数定义域', 'en-gap-fill': '七选5 补全短文' }
+const subjectNames = new Map(activeSubjects.map(subject => [subject.id, subject.name]))
 const index = [
   ...pages,
-  ...subjects.map(subject => ({ title: subject.name, url: subjectUrl(subject.id), label: '学科', text: subject.modules.join(' ') })),
-  ...nodes.map(node => {
+  ...activeSubjects.map(subject => ({ title: subject.name, url: subjectUrl(subject.id), label: '学科', text: subject.modules.join(' ') })),
+  ...nodes.filter(node => subjectNames.has(node.subject)).map(node => {
     const lesson = lessons.get(node.id)
+    const guide = guides.get(node.id)
     return {
       title: node.name,
       url: skillUrl(node.id),
-      label: lessons.has(node.id) ? '原子能力' : '能力',
-      text: [subjectNames.get(node.subject), ...lineage(node.id).map(parent => parent.name), node.definition, aliases[node.id], lesson?.foundation, lesson?.principle, lesson?.approach, lesson?.standard, lesson?.application, lesson?.error, ...(lesson?.examples.flatMap(example => [example.prompt, example.solution]) ?? [])].join(' '),
+      label: guide?.kind ?? (lesson ? '专项课程' : '目录'),
+      text: [subjectNames.get(node.subject), ...lineage(node.id).map(parent => parent.name), node.definition, aliases[node.id], ...(guide?.points ?? []), guide?.example?.prompt, lesson?.foundation, lesson?.principle, lesson?.approach, lesson?.standard, lesson?.application, lesson?.error, ...(lesson?.examples.flatMap(example => [example.prompt, example.solution]) ?? [])].join(' '),
     }
   }),
   ...entities.map(entity => ({ title: entity.name, url: entityUrl(entity.id), label: kindLabel[entity.kind], text: entity.description })),
@@ -67,6 +69,6 @@ onUnmounted(() => document.removeEventListener('keydown', shortcut))
     <ul v-if="results.length" class="search-results">
       <li v-for="result in results" :key="result.url"><a :href="result.url" @click="dialog?.close()"><span>{{ result.title }}</span><small>{{ result.label }}</small></a></li>
     </ul>
-    <p v-else class="quiet" aria-live="polite">{{ query.trim() ? '没有匹配结果，试试更短的词。' : '试试「通分」「长难句」或「浙江选考」。' }}</p>
+    <p v-else class="quiet" aria-live="polite">{{ query.trim() ? '没有匹配结果，试试更短的词。' : '试试「函数定义域」「七选五」或「3500」。' }}</p>
   </dialog>
 </template>

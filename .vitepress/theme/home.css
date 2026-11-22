@@ -25,15 +25,12 @@
 .visual-node.terminal .visual-node-dot { background: var(--accent); }
 .visual-node small { color: var(--accent); font-size: .7rem; font-weight: 600; white-space: nowrap; }
 .visual-bottom { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 3px 14px; border-top: 1px solid var(--line); padding-top: 11px; color: var(--muted); font-size: .75rem; }
-.home-overview { display: flex; flex-wrap: wrap; gap: 7px 25px; padding: 15px 3px 0; color: var(--muted); font-size: .875rem; }
-.home-overview strong { color: var(--accent); margin-right: 2px; }
-.home-overview > span + span { border-left: 1px solid var(--line); padding-left: 22px; }
 .home-section { margin-top: 37px; }
 .section-head { display: flex; flex-wrap: wrap; align-items: baseline; justify-content: space-between; gap: 8px; margin-bottom: 13px; }
 .section-head h2 { font-size: 1.48rem; }
 .entry-grid, .focus-grid, .subject-grid { display: grid; gap: 13px; }
 .entry-grid, .subject-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); }
-.focus-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+.focus-grid, .subject-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
 .entry-card { display: grid; align-content: start; gap: 9px; background: var(--surface); color: var(--ink); text-decoration: none; border: 1px solid var(--line); border-radius: 15px; padding: 18px 20px; }
 .entry-card:hover, .subject-card:hover { border-color: var(--accent); box-shadow: var(--shadow); }
 .entry-icon { display: inline-grid; place-items: center; width: 38px; height: 38px; border-radius: 9px; font-size: 1.3rem; line-height: 1; }
@@ -52,7 +49,6 @@
 .subject-icon.english { background: #ece7fb; color: #634b9b; }
 .subject-body { display: grid; gap: 1px; }
 .subject-body > span { color: var(--muted); font-size: .8125rem; }
-.subject-progress { margin-left: auto; flex: none; align-self: start; font-size: .75rem; color: var(--accent); }
 @media (max-width: 900px) {
   .hero { gap: 26px; padding: 32px; }
   .hero-visual { padding-inline: 15px; }
@@ -65,10 +61,7 @@
 }
 @media (max-width: 460px) {
   .entry-grid, .focus-grid { grid-template-columns: 1fr; }
-  .home-overview { gap: 6px 12px; }
-  .home-overview > span + span { padding-left: 10px; }
   .subject-card { align-items: flex-start; gap: 7px; padding: 8px; }
-  .subject-progress { display: none; }
   .subject-icon { width: 30px; height: 30px; }
   .visual-node { margin-left: calc(var(--depth) * 10px); }
   .visual-node:not(:first-child)::before { left: -12px; width: 10px; }

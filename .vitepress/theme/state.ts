@@ -4,11 +4,12 @@ import type { Attempt } from '../../data/types.ts'
 interface Progress {
   favorites: string[]
   read: string[]
+  words: string[]
   attempts: Attempt[]
 }
 
 const key = 'zhijie-study-v1'
-const empty = (): Progress => ({ favorites: [], read: [], attempts: [] })
+const empty = (): Progress => ({ favorites: [], read: [], words: [], attempts: [] })
 const state = ref<Progress>(empty())
 const storageWarning = ref(false)
 let initialized = false
@@ -22,7 +23,7 @@ export function useProgress() {
       if (!saved) return
       const parsed = JSON.parse(saved) as Partial<Progress> | null
       if (!parsed || !Array.isArray(parsed.favorites) || !Array.isArray(parsed.read) || !Array.isArray(parsed.attempts)) return
-      state.value = parsed as Progress
+      state.value = { favorites: parsed.favorites, read: parsed.read, attempts: parsed.attempts, words: Array.isArray(parsed.words) ? parsed.words : [] }
     } catch {
       storageWarning.value = true
     }
@@ -37,7 +38,7 @@ export function useProgress() {
     }
   }
 
-  function toggle(bucket: 'favorites' | 'read', id: string) {
+  function toggle(bucket: 'favorites' | 'read' | 'words', id: string) {
     const list = state.value[bucket]
     state.value[bucket] = list.includes(id) ? list.filter(value => value !== id) : [...list, id]
     save()

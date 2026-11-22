@@ -1,5 +1,5 @@
-import type { Entity, Lesson, Node, Question } from './types.ts'
-import { groupsAndPlanned, outlineNodes, subjects } from './taxonomy.ts'
+import type { Entity, Guide, Lesson, Node, Question } from './types.ts'
+import { activeSubjects, groupsAndPlanned, outlineNodes, subjects } from './taxonomy.ts'
 import { entities } from './entities.ts'
 import algebra from './algebra-units.ts'
 import equations from './equation-units.ts'
@@ -7,10 +7,19 @@ import functions from './function-units.ts'
 import vocabulary from './vocab-units.ts'
 import discourse from './discourse-units.ts'
 import inference from './inference-units.ts'
+import { mathGuides } from './math-guides.ts'
+import { englishGuides } from './english-guides.ts'
 
 const units = [...algebra, ...equations, ...functions, ...vocabulary, ...discourse, ...inference]
-export { entities, subjects }
-export const nodes: Node[] = [...groupsAndPlanned, ...outlineNodes, ...units.map(unit => unit.node)]
+export { activeSubjects, entities, subjects }
+export const guides = new Map<string, Guide>([...mathGuides, ...englishGuides].map(guide => [guide.id, guide]))
+const reassignedParents: Record<string, string> = { square: 'math-prep', 'main-idea': 'en-main-idea' }
+export const nodes: Node[] = [
+  ...groupsAndPlanned,
+  ...outlineNodes,
+  ...guides.values(),
+  ...units.map(({ node }) => ({ ...node, parent: reassignedParents[node.id] ?? node.parent })),
+]
 export const lessons = new Map<string, Lesson>(units.map(unit => [
   unit.node.id, unit.lesson as Lesson,
 ]))
