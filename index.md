@@ -1,4 +1,4 @@
 ---
 pageKind: home
-title: 浙江高中知识与能力精准突破平台
+title: 高中数学与物理知识库
 ---

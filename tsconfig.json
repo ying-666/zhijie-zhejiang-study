@@ -23,7 +23,6 @@
     "scripts/**/*.ts",
     ".vitepress/**/*.ts",
     ".vitepress/**/*.vue",
-    "skills/**/*.ts",
-    "network/**/*.ts"
+    "skills/**/*.ts"
   ]
 }

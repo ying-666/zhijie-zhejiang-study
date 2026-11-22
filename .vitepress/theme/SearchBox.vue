@@ -1,31 +1,24 @@
 <script setup lang="ts">
 import { computed, nextTick, onMounted, onUnmounted, ref } from 'vue'
-import { activeSubjects, entities, entityUrl, guides, kindLabel, lessons, lineage, nodes, skillUrl, subjectUrl } from '../../data/catalog.ts'
+import { articleById, lineage, nodes, skillUrl, subjects } from '../../data/catalog.ts'
 
-const pages = [
-  { title: '英语课标词汇与拓展', url: '/words/', label: '词汇', text: '3500 3100 单词 词汇表 背单词 自测 新课标' },
-  { title: '学科知识库', url: '/library/', label: '入口', text: '完整学习模式 高考速查' },
-  { title: '浙江高考专题复习', url: '/review/', label: '专题', text: '浙江选考 学考 高考 政策 教材 2026 2027' },
-  { title: '能力训练', url: '/training/', label: '入口', text: '诊断 专项 复测 综合' },
-  { title: '我的学习', url: '/progress/', label: '入口', text: '收藏 错题 进度' },
-]
-const aliases: Record<string, string> = { insertion: '长难句 插入语', 'word-context': '生词 词义推断', factor: '因式化 分解', 'root-signs': '韦达定理', 'math-definition': '函数定义域', 'en-gap-fill': '七选5 补全短文' }
-const subjectNames = new Map(activeSubjects.map(subject => [subject.id, subject.name]))
-const index = [
-  ...pages,
-  ...activeSubjects.map(subject => ({ title: subject.name, url: subjectUrl(subject.id), label: '学科', text: subject.modules.join(' ') })),
-  ...nodes.filter(node => subjectNames.has(node.subject)).map(node => {
-    const lesson = lessons.get(node.id)
-    const guide = guides.get(node.id)
-    return {
-      title: node.name,
-      url: skillUrl(node.id),
-      label: guide?.kind ?? (lesson ? '专项课程' : '目录'),
-      text: [subjectNames.get(node.subject), ...lineage(node.id).map(parent => parent.name), node.definition, aliases[node.id], ...(guide?.points ?? []), guide?.example?.prompt, lesson?.foundation, lesson?.principle, lesson?.approach, lesson?.standard, lesson?.application, lesson?.error, ...(lesson?.examples.flatMap(example => [example.prompt, example.solution]) ?? [])].join(' '),
-    }
-  }),
-  ...entities.map(entity => ({ title: entity.name, url: entityUrl(entity.id), label: kindLabel[entity.kind], text: entity.description })),
-]
+const aliases: Record<string, string> = {
+  'math-definition': '函数定义域',
+  'root-signs': '韦达定理',
+  'physics-experiment-resistance': '电流表内接法 电流表外接法 伏安法',
+  'physics-induction': '法拉第电磁感应定律',
+}
+const terms = nodes.map(node => {
+  const article = articleById.get(node.id)
+  const subject = subjects.find(subject => subject.id === node.subject)!.name
+  return {
+    name: node.name,
+    subject,
+    url: skillUrl(node.id),
+    text: [node.name, subject, ...lineage(node.id).map(item => item.name), node.definition,
+      aliases[node.id], ...(article?.explanation ?? []), article?.application, article?.pitfall].join(' ').toLowerCase(),
+  }
+})
 
 const dialog = ref<HTMLDialogElement>()
 const field = ref<HTMLInputElement>()
@@ -33,10 +26,10 @@ const query = ref('')
 const results = computed(() => {
   const words = query.value.trim().toLowerCase().split(/\s+/).filter(Boolean)
   if (!words.length) return []
-  return index
-    .filter(item => words.every(word => (item.title + ' ' + item.text).toLowerCase().includes(word)))
-    .sort((a, b) => Number(words.some(word => b.title.toLowerCase().includes(word))) - Number(words.some(word => a.title.toLowerCase().includes(word))))
-    .slice(0, 18)
+  const titleMatches = (name: string) => words.filter(word => name.toLowerCase().includes(word)).length
+  return terms.filter(item => words.every(word => item.text.includes(word)))
+    .sort((a, b) => titleMatches(b.name) - titleMatches(a.name))
+    .slice(0, 16)
 })
 
 async function open() {
@@ -61,14 +54,17 @@ onUnmounted(() => document.removeEventListener('keydown', shortcut))
 
 <template>
   <button class="search-trigger" type="button" @click="open">
-    <span class="magnifier" aria-hidden="true"></span><span>搜索知识、能力或题型</span><kbd>Ctrl K</kbd>
+    <span class="magnifier" aria-hidden="true"></span><span>搜索知识点</span><kbd>Ctrl K</kbd>
   </button>
   <dialog ref="dialog" class="search-dialog" aria-labelledby="search-heading">
-    <div class="search-top"><h2 id="search-heading">全站搜索</h2><button class="button small" @click="dialog?.close()">关闭</button></div>
-    <form @submit.prevent="firstResult"><label for="site-search" class="sr-only">搜索关键词</label><input id="site-search" ref="field" v-model="query" type="search" placeholder="例如：数学 判别式"></form>
+    <div class="search-top"><h2 id="search-heading">搜索知识点</h2><button class="button small" @click="dialog?.close()">关闭</button></div>
+    <form @submit.prevent="firstResult">
+      <label for="site-search" class="sr-only">搜索关键词</label>
+      <input id="site-search" ref="field" v-model="query" type="search" placeholder="例如：函数定义域、伏安法">
+    </form>
     <ul v-if="results.length" class="search-results">
-      <li v-for="result in results" :key="result.url"><a :href="result.url" @click="dialog?.close()"><span>{{ result.title }}</span><small>{{ result.label }}</small></a></li>
+      <li v-for="result in results" :key="result.url"><a :href="result.url" @click="dialog?.close()"><span>{{ result.name }}</span><small>{{ result.subject }}</small></a></li>
     </ul>
-    <p v-else class="quiet" aria-live="polite">{{ query.trim() ? '没有匹配结果，试试更短的词。' : '试试「函数定义域」「七选五」或「3500」。' }}</p>
+    <p v-else class="quiet" aria-live="polite">{{ query.trim() ? '没有匹配结果，试试更短的词。' : '试试「判别式」或「电磁感应」。' }}</p>
   </dialog>
 </template>

@@ -1,4 +1,4 @@
 ---
-pageKind: subjects
-title: 学科导航
+pageKind: library
+title: 学科知识库
 ---
