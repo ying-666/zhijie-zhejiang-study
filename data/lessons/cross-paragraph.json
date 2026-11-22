@@ -1,0 +1,129 @@
+{
+  "node": {
+    "id": "cross-paragraph",
+    "subject": "english",
+    "name": "整合跨段信息",
+    "parent": "information",
+    "definition": "把来自不同段落的证据按共同对象、时间或条件连接起来。"
+  },
+  "lesson": {
+    "definition": "把来自不同段落的证据按共同对象、时间或条件连接起来。",
+    "prerequisites": [
+      "detail",
+      "reference"
+    ],
+    "knowledge": [
+      "text-scope",
+      "cohesion"
+    ],
+    "methods": [
+      "synthesize"
+    ],
+    "problemTypes": [
+      "paragraph",
+      "detail-type"
+    ],
+    "foundation": "先记录每段提供的角色，例如背景、变化、解释、结果。只有可以确认同一对象时才合并事实。",
+    "principle": "两条证据组合可以得到关系，但不自动证明因果。若对象相同而条件不同，要保留条件差异。",
+    "approach": "写出两条最短证据并标记相同对象。能说明缺少任一证据时为何无法作答。",
+    "examples": [
+      {
+        "level": "入门",
+        "prompt": "P1: The west path closed after a storm. P3: Its repairs ended on Thursday. 两段合起来说明什么？",
+        "solution": "its 指 west path；风暴后关闭的西路在周四完成修理。"
+      },
+      {
+        "level": "进阶",
+        "prompt": "P1: Class A measured plants each morning. P2: Class B measured them each evening. 一项可确认的差异？",
+        "solution": "两班的测量时段不同；没有测量结果，不能判断哪班更准。"
+      }
+    ],
+    "error": "两段出现同一主题就强加因果。写出文本明说或逻辑必需的连接关系。",
+    "standard": "能为综合结论分别指出两处证据，并保留不同条件或时间。",
+    "application": "多段说明文可能在开头提方法，在后段给适用范围或例外。",
+    "source": "AI 辅助原创",
+    "review": "待教师复审"
+  },
+  "questions": [
+    {
+      "id": "cross-paragraph-1",
+      "skills": [
+        "cross-paragraph"
+      ],
+      "purpose": "diagnosis",
+      "prompt": "P1: No cars may enter the park. P2: Medical vehicles may enter at any time. What does P2 add?",
+      "options": [
+        "一般规则的例外",
+        "关闭时间",
+        "免费停车",
+        "公交线路"
+      ],
+      "answer": 0,
+      "explanation": "医疗车辆是一般禁行规则的例外。"
+    },
+    {
+      "id": "cross-paragraph-2",
+      "skills": [
+        "cross-paragraph"
+      ],
+      "purpose": "diagnosis",
+      "prompt": "P1: Lina collected seeds in May. P4: She planted them in June. 合并可知？",
+      "options": [
+        "六月采种",
+        "五月收集的种子六月种下",
+        "五月未采种",
+        "六月换了种子"
+      ],
+      "answer": 1,
+      "explanation": "she 指 Lina，them 指 seeds。"
+    },
+    {
+      "id": "cross-paragraph-3",
+      "skills": [
+        "cross-paragraph"
+      ],
+      "purpose": "practice",
+      "prompt": "P1: The first test used tap water. P2: The second used salt water. 哪个变量不同？",
+      "options": [
+        "天气",
+        "人数",
+        "用水种类",
+        "日期"
+      ],
+      "answer": 2,
+      "explanation": "两段比较用水。"
+    },
+    {
+      "id": "cross-paragraph-4",
+      "skills": [
+        "cross-paragraph"
+      ],
+      "purpose": "retest",
+      "prompt": "P1: The museum offered free entry on Fridays. P3: Last Friday, the museum was closed for repairs. 上周五可以免费进入吗？",
+      "options": [
+        "可以到中午",
+        "只能入口附近",
+        "所有人付费",
+        "闭馆无法进入"
+      ],
+      "answer": 3,
+      "explanation": "一般规则要受当天闭馆这一特殊事实约束。"
+    },
+    {
+      "id": "cross-paragraph-5",
+      "skills": [
+        "cross-paragraph"
+      ],
+      "purpose": "retest",
+      "prompt": "P1: The red bus stopped at the market. P2: After July, that route ended at the library. 变化是什么？",
+      "options": [
+        "线路终点改到图书馆",
+        "集市迁到图书馆",
+        "红车停售",
+        "过去终点一定是集市"
+      ],
+      "answer": 0,
+      "explanation": "后段确认新的终点，前段只说明过去经过集市。"
+    }
+  ]
+}

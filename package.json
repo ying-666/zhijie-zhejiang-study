@@ -1,0 +1,26 @@
+{
+  "name": "zhejiang-study-map",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "engines": {
+    "node": ">=22.12"
+  },
+  "scripts": {
+    "dev": "vitepress dev --host 127.0.0.1",
+    "build": "vitepress build",
+    "preview": "vitepress preview --host 127.0.0.1",
+    "check:links": "node scripts/check-links.mjs",
+    "check": "node --experimental-strip-types scripts/check.ts && vue-tsc --noEmit"
+  },
+  "dependencies": {
+    "katex": "0.16.47",
+    "vue": "3.5.38",
+    "vitepress": "1.6.4"
+  },
+  "devDependencies": {
+    "@types/node": "22.15.3",
+    "typescript": "5.8.3",
+    "vue-tsc": "2.2.12"
+  }
+}

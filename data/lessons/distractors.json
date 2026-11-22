@@ -1,0 +1,128 @@
+{
+  "node": {
+    "id": "distractors",
+    "subject": "english",
+    "name": "按证据排除干扰选项",
+    "parent": "strategy",
+    "definition": "用原文验证每个选项，并指出干扰项最小错误位置。"
+  },
+  "lesson": {
+    "definition": "用原文验证每个选项，并指出干扰项最小错误位置。",
+    "prerequisites": [
+      "paraphrase",
+      "bounded-inference"
+    ],
+    "knowledge": [
+      "text-scope"
+    ],
+    "methods": [
+      "evidence",
+      "bound"
+    ],
+    "problemTypes": [
+      "option-type"
+    ],
+    "foundation": "常见偏差包括对象偷换、范围扩大、因果倒置、答非所问和原文未支持。类别帮助记错因，选项仍须逐项看证据。",
+    "principle": "只要一个必要条件不符，整个陈述就不满足题目。信息为真也可能回答了另一个问题。",
+    "approach": "先用自己的话预测答案，再核对含义。两个选项接近时比较对象、限定词和逻辑方向。",
+    "examples": [
+      {
+        "level": "入门",
+        "prompt": "The clinic lends helmets only to children. 选项 The clinic sells helmets to children 有什么问题？",
+        "solution": "对象一致，但 lends 变成 sells，行动改变。"
+      },
+      {
+        "level": "进阶",
+        "prompt": "The bus runs every day except Sunday. 选项 It runs on weekends 有什么风险？",
+        "solution": "weekends 通常涵盖周六、周日，选项把周日也纳入，范围与例外冲突。"
+      }
+    ],
+    "error": "因熟悉某个词而选择含词选项。把它改写成完整命题，逐项核对。",
+    "standard": "能指出一个具体词或关系导致选项错误，并用原句约束剩余选项。",
+    "application": "阅读综合任务中可将错因回连到词义、句法、指代或证据强度。",
+    "source": "AI 辅助原创",
+    "review": "待教师复审"
+  },
+  "questions": [
+    {
+      "id": "distractors-1",
+      "skills": [
+        "distractors"
+      ],
+      "purpose": "diagnosis",
+      "prompt": "Only morning sessions are free. All sessions are free 错在哪里？",
+      "options": [
+        "范围扩大",
+        "拼写错误",
+        "时间顺序反转",
+        "没有错"
+      ],
+      "answer": 0,
+      "explanation": "只说明上午免费。"
+    },
+    {
+      "id": "distractors-2",
+      "skills": [
+        "distractors"
+      ],
+      "purpose": "diagnosis",
+      "prompt": "Nora gave Ben a ticket. Ben gave Nora a ticket 属于哪项错误？",
+      "options": [
+        "程度变化",
+        "角色调换",
+        "词义不变",
+        "删去地点"
+      ],
+      "answer": 1,
+      "explanation": "给出者和接收者互换。"
+    },
+    {
+      "id": "distractors-3",
+      "skills": [
+        "distractors"
+      ],
+      "purpose": "practice",
+      "prompt": "The project began in May because extra funds arrived. 题目问动工月份，Extra funds arrived 有何问题？",
+      "options": [
+        "日期错误",
+        "因果反转",
+        "答非所问",
+        "对象调换"
+      ],
+      "answer": 2,
+      "explanation": "这是原因，题目问时间。"
+    },
+    {
+      "id": "distractors-4",
+      "skills": [
+        "distractors"
+      ],
+      "purpose": "retest",
+      "prompt": "The plants may grow faster indoors. The plants will grow faster indoors 错在哪？",
+      "options": [
+        "主语更改",
+        "地点更改",
+        "相反方向",
+        "把可能改成确定"
+      ],
+      "answer": 3,
+      "explanation": "may 不承诺事实。"
+    },
+    {
+      "id": "distractors-5",
+      "skills": [
+        "distractors"
+      ],
+      "purpose": "retest",
+      "prompt": "Tickets are sold online; bags must be checked at the door. 如何买票？",
+      "options": [
+        "Online.",
+        "At the door.",
+        "By checking a bag.",
+        "Visitors get free tickets."
+      ],
+      "answer": 0,
+      "explanation": "at the door 回答的是寄存地点。"
+    }
+  ]
+}

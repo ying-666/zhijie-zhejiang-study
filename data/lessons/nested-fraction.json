@@ -1,0 +1,129 @@
+{
+  "node": {
+    "id": "nested-fraction",
+    "subject": "math",
+    "name": "复杂分式化简",
+    "parent": "fraction",
+    "definition": "区分复杂分式的内部分母与外层除数，逐层化简。"
+  },
+  "lesson": {
+    "definition": "区分复杂分式的内部分母与外层除数，逐层化简。",
+    "prerequisites": [
+      "common-denom",
+      "cancel"
+    ],
+    "knowledge": [
+      "domain"
+    ],
+    "methods": [
+      "restrict",
+      "denom-route"
+    ],
+    "problemTypes": [
+      "algebra-simplify",
+      "rational-problem"
+    ],
+    "foundation": "分式线等同除号。内部分母必须非零，外层分母作为一个整体也必须非零。",
+    "principle": "$\\frac{a/b}{c/d}=\\frac{ad}{bc}$，条件为 $b,d,c$ 都非零。外层除法要求 $c/d\\ne0$。",
+    "approach": "上下两部分各通分，再乘以下部的倒数。上下同乘非零公分母可加速，但要先记录限制。",
+    "examples": [
+      {
+        "level": "入门",
+        "prompt": "$\\frac{1/x}{2/x}$ 化简。",
+        "solution": "内部分母要求 $x\\ne0$，外层分母 $2/x$ 在该范围非零，商为 $\\frac12$。"
+      },
+      {
+        "level": "进阶",
+        "prompt": "$\\frac{1+1/x}{1-1/x}$ 化简。",
+        "solution": "先要求 $x\\ne0$，又因 $1-1/x=0$ 对应 $x=1$，排除 1。上下同乘 $x$，得 $\\frac{x+1}{x-1}$。"
+      }
+    ],
+    "error": "只看结果的分母，漏掉原式限制。把每条分式线对应的非零条件单独写出。",
+    "standard": "能在三步内列全限制、执行倒数乘法、检查简式。",
+    "application": "比值型函数变形中保留原有空点，后续零点和单调性才有正确区间。",
+    "source": "AI 辅助原创",
+    "review": "待教师复审"
+  },
+  "questions": [
+    {
+      "id": "nested-fraction-1",
+      "skills": [
+        "nested-fraction"
+      ],
+      "purpose": "diagnosis",
+      "prompt": "$\\frac{2/x}{3/x}$ 在 $x\\ne0$ 时为多少？",
+      "options": [
+        "$\\frac32$",
+        "$\\frac23$",
+        "$\\frac{6}{x^2}$",
+        "$\\frac{2}{3x}$"
+      ],
+      "answer": 1,
+      "explanation": "乘上 $x/3$ 后消去 $x$。"
+    },
+    {
+      "id": "nested-fraction-2",
+      "skills": [
+        "nested-fraction"
+      ],
+      "purpose": "diagnosis",
+      "prompt": "$\\frac{1}{(x-2)/x}$ 需排除哪些值？",
+      "options": [
+        "仅 0",
+        "仅 2",
+        "0 和 2",
+        "0 和 $-2$"
+      ],
+      "answer": 2,
+      "explanation": "内分母排除 0，外分母的零点排除 2。"
+    },
+    {
+      "id": "nested-fraction-3",
+      "skills": [
+        "nested-fraction"
+      ],
+      "purpose": "practice",
+      "prompt": "$\\frac{1-2/x}{1+2/x}$ 可化为什么？",
+      "options": [
+        "$\\frac{x-2}{x+2}$，排除 0 和 $-2$",
+        "$\\frac{x-2}{x+2}$，仅排除 $-2$",
+        "$\\frac{x+2}{x-2}$，排除 0 和 2",
+        "$-1$，排除 0"
+      ],
+      "answer": 0,
+      "explanation": "上下同乘 $x$ 前先排除 0 和外分母的零点 $-2$。"
+    },
+    {
+      "id": "nested-fraction-4",
+      "skills": [
+        "nested-fraction"
+      ],
+      "purpose": "retest",
+      "prompt": "$\\frac{1/y}{1+1/y}$ 可化为什么？",
+      "options": [
+        "$\\frac1{y+1}$，排除 $-1$",
+        "$\\frac1{y+1}$，排除 0 和 $-1$",
+        "$\\frac y{y+1}$，排除 0 和 $-1$",
+        "$1$，排除 0"
+      ],
+      "answer": 1,
+      "explanation": "上下乘 $y$，且 $1+1/y$ 不为零。"
+    },
+    {
+      "id": "nested-fraction-5",
+      "skills": [
+        "nested-fraction"
+      ],
+      "purpose": "retest",
+      "prompt": "$\\frac{(t-3)/t}{(t+1)/t}$ 可化为什么？",
+      "options": [
+        "$\\frac{t+1}{t-3}$",
+        "$\\frac{t-3}{t+1}$，仅排除 $-1$",
+        "$\\frac{t-3}{t+1}$，排除 0 和 $-1$",
+        "$\\frac{t-3}{t+1}$，排除 0 和 3"
+      ],
+      "answer": 2,
+      "explanation": "内分母排除 0，外层除数的分子排除 $-1$。"
+    }
+  ]
+}

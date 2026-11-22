@@ -1,0 +1,127 @@
+{
+  "node": {
+    "id": "relative-clause",
+    "subject": "english",
+    "name": "确定定语从句修饰对象",
+    "parent": "syntax",
+    "definition": "找到关系从句边界，识别先行词及从句中的信息缺口。"
+  },
+  "lesson": {
+    "definition": "找到关系从句边界，识别先行词及从句中的信息缺口。",
+    "prerequisites": [
+      "main-clause"
+    ],
+    "knowledge": [
+      "clause",
+      "cohesion"
+    ],
+    "methods": [
+      "bracket"
+    ],
+    "problemTypes": [
+      "sentence-meaning"
+    ],
+    "foundation": "who 常指人，which 常指事物。whose 表所属关系。逗号与标点能帮助圈定非限制性从句。",
+    "principle": "把先行词代回从句的主语、宾语或地点槽。代回需同时满足语法和实际语义。",
+    "approach": "先划出关系词到从句末尾，列出附近可选先行词，再检验角色。逗号后的 which 有时指上文整件事。",
+    "examples": [
+      {
+        "level": "入门",
+        "prompt": "The key that opened the gate was rusty. that 指什么？",
+        "solution": "从句缺主语，能打开门的是 the key。"
+      },
+      {
+        "level": "进阶",
+        "prompt": "The team canceled the walk, which disappointed Ana. which 指什么？",
+        "solution": "令人失望的是团队取消步行这件事，整个主句作先行内容。"
+      }
+    ],
+    "error": "机械选择最近的名词。代回从句验证谁能承担对应功能。",
+    "standard": "能标出从句边界、先行对象和语法角色，并准确复述。",
+    "application": "说明文中多层定语常承载事实限制，去掉它们后需补回才能核对选项。",
+    "source": "AI 辅助原创",
+    "review": "待教师复审"
+  },
+  "questions": [
+    {
+      "id": "relative-clause-1",
+      "skills": [
+        "relative-clause"
+      ],
+      "purpose": "diagnosis",
+      "prompt": "The student who drew the map lives nearby. who 指？",
+      "options": [
+        "map",
+        "student",
+        "nearby",
+        "drawing"
+      ],
+      "answer": 1,
+      "explanation": "从句需要执行 drew 的人。"
+    },
+    {
+      "id": "relative-clause-2",
+      "skills": [
+        "relative-clause"
+      ],
+      "purpose": "diagnosis",
+      "prompt": "I visited the workshop where the bikes are repaired. where 表什么？",
+      "options": [
+        "修理时间",
+        "修理原因",
+        "修理地点",
+        "修理者"
+      ],
+      "answer": 2,
+      "explanation": "where 等于 in the workshop。"
+    },
+    {
+      "id": "relative-clause-3",
+      "skills": [
+        "relative-clause"
+      ],
+      "purpose": "practice",
+      "prompt": "The pilot whose radio failed landed safely. 什么坏了？",
+      "options": [
+        "飞机",
+        "跑道",
+        "飞行员",
+        "飞行员的无线电"
+      ],
+      "answer": 3,
+      "explanation": "whose radio 表飞行员的无线电。"
+    },
+    {
+      "id": "relative-clause-4",
+      "skills": [
+        "relative-clause"
+      ],
+      "purpose": "retest",
+      "prompt": "Tom returned the book that he had borrowed in April. that 在从句中作？",
+      "options": [
+        "borrowed 的宾语",
+        "borrowed 的主语",
+        "地点状语",
+        "时间状语"
+      ],
+      "answer": 0,
+      "explanation": "he had borrowed 后缺借入的对象。"
+    },
+    {
+      "id": "relative-clause-5",
+      "skills": [
+        "relative-clause"
+      ],
+      "purpose": "retest",
+      "prompt": "The window stayed open, which helped cool the room. which 指？",
+      "options": [
+        "房间",
+        "窗户保持开着这件事",
+        "窗框材料",
+        "天气"
+      ],
+      "answer": 1,
+      "explanation": "后半句评价前述整个事件。"
+    }
+  ]
+}

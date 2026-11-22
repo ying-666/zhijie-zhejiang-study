@@ -1,0 +1,130 @@
+{
+  "node": {
+    "id": "stance",
+    "subject": "english",
+    "name": "判断写作者态度与目的",
+    "parent": "inference",
+    "definition": "从评价措辞、论证安排与结尾行动判断态度和写作目的。"
+  },
+  "lesson": {
+    "definition": "从评价措辞、论证安排与结尾行动判断态度和写作目的。",
+    "prerequisites": [
+      "bounded-inference",
+      "logic"
+    ],
+    "knowledge": [
+      "cohesion",
+      "text-scope"
+    ],
+    "methods": [
+      "evidence",
+      "bound"
+    ],
+    "problemTypes": [
+      "inference-type",
+      "paragraph"
+    ],
+    "foundation": "态度问作者如何评价，目的问作者为何写作。引文中的观点有自己的发言者。",
+    "principle": "程度副词、转折和最终建议能提示态度强弱。阅读目标应看整段如何服务论点，而非只看题材。",
+    "approach": "先标发言者，定位评价词与行动建议。双面描述用「有保留地认可」等足以覆盖信息的概括。",
+    "examples": [
+      {
+        "level": "入门",
+        "prompt": "The idea is promising, but it needs another trial before schools adopt it. 作者态度？",
+        "solution": "承认潜力，并要求再试验，是谨慎认可。"
+      },
+      {
+        "level": "进阶",
+        "prompt": "The notice lists drop-off locations and asks readers to bring used batteries on Saturday. 目的？",
+        "solution": "给出地点和时间后发出行动请求，主要为动员读者在周六交旧电池。"
+      }
+    ],
+    "error": "把被引用者的评价当成作者态度。找清引语来源和作者框架。",
+    "standard": "能分别写出态度或目的并引用措辞，避免把轻微保留解释成强烈反对。",
+    "application": "评述类材料往往需要把证据、评价和建议组合起来。",
+    "source": "AI 辅助原创",
+    "review": "待教师复审"
+  },
+  "questions": [
+    {
+      "id": "stance-1",
+      "skills": [
+        "stance"
+      ],
+      "purpose": "diagnosis",
+      "prompt": "The repair saved energy, but its high cost makes it unsuitable for small shops. 作者态度？",
+      "options": [
+        "强烈赞赏所有方面",
+        "有肯定也有限制",
+        "无评价",
+        "反对节能"
+      ],
+      "answer": 1,
+      "explanation": "but 后限定适用对象。"
+    },
+    {
+      "id": "stance-2",
+      "skills": [
+        "stance"
+      ],
+      "purpose": "diagnosis",
+      "prompt": "“Useless,” said one resident. Yet the writer notes the ramp helped people with strollers. 谁称坡道无用？",
+      "options": [
+        "作者",
+        "所有人",
+        "一位居民",
+        "使用婴儿车的人"
+      ],
+      "answer": 2,
+      "explanation": "引语中的评价由 resident 发出。"
+    },
+    {
+      "id": "stance-3",
+      "skills": [
+        "stance"
+      ],
+      "purpose": "practice",
+      "prompt": "The post explains how to set up a bicycle light in three steps. 目的？",
+      "options": [
+        "售卖脚踏车",
+        "记录事故",
+        "比较预算",
+        "指导安装"
+      ],
+      "answer": 3,
+      "explanation": "步骤说明用于照做。"
+    },
+    {
+      "id": "stance-4",
+      "skills": [
+        "stance"
+      ],
+      "purpose": "retest",
+      "prompt": "The author calls the results encouraging but preliminary. 态度？",
+      "options": [
+        "谨慎乐观",
+        "完全否定",
+        "强烈愤怒",
+        "毫无兴趣"
+      ],
+      "answer": 0,
+      "explanation": "两个形容词分别表示正向和保留。"
+    },
+    {
+      "id": "stance-5",
+      "skills": [
+        "stance"
+      ],
+      "purpose": "retest",
+      "prompt": "Please sign up by Thursday if you can help repair the trail. 文段在做什么？",
+      "options": [
+        "报告结果",
+        "征集帮手",
+        "解释地貌",
+        "比较路线"
+      ],
+      "answer": 1,
+      "explanation": "sign up 与 help 指向招募。"
+    }
+  ]
+}

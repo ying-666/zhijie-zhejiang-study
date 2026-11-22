@@ -1,0 +1,127 @@
+{
+  "node": {
+    "id": "param-case",
+    "subject": "math",
+    "name": "参数分类与判别式",
+    "parent": "parametric",
+    "definition": "分离首项系数为零的退化情况，再判断其余参数下根数。"
+  },
+  "lesson": {
+    "definition": "分离首项系数为零的退化情况，再判断其余参数下根数。",
+    "prerequisites": [
+      "formula"
+    ],
+    "knowledge": [
+      "delta"
+    ],
+    "methods": [
+      "parameter-route",
+      "quadratic-route"
+    ],
+    "problemTypes": [
+      "parameter-problem"
+    ],
+    "foundation": "一般式允许参数令二次项消失。一次方程还须核对一次项系数是否为零。",
+    "principle": "判别式条件来自二次式配方，推导用了 $a\\ne0$。若 $a=0$，方程变成 $bx+c=0$，分别考虑 $b\\ne0$、$b=0,c\\ne0$、$b=c=0$。",
+    "approach": "题目若明确给出一元二次方程，可直接保留 $a\\ne0$；题目只给方程，必须另查退化分支。",
+    "examples": [
+      {
+        "level": "入门",
+        "prompt": "判断 $mx^2+x+1=0$ 有实根的 $m$。",
+        "solution": "$m=0$ 时 $x=-1$。$m\\ne0$ 时 $\\Delta=1-4m\\ge0$，合并得到 $m\\le1/4$。"
+      },
+      {
+        "level": "进阶",
+        "prompt": "何时 $(m-1)x^2+2x+1=0$ 恰有一个实根？",
+        "solution": "$m=1$ 一次方程有一个根。其余需 $\\Delta=4-4(m-1)=0$，得 $m=2$。答案 $1$ 或 $2$。"
+      }
+    ],
+    "error": "直接写 $\\Delta=0$ 判断恰一实根，漏掉一次分支。先写 $a=0$ 与 $a\\ne0$ 两栏，再并集合。",
+    "standard": "能列出退化方程、在二次分支判断根数，并正确合并端点。",
+    "application": "函数族交点个数可用同样的分类思路，同时需要检查交点定义域。",
+    "source": "AI 辅助原创",
+    "review": "待教师复审"
+  },
+  "questions": [
+    {
+      "id": "param-case-1",
+      "skills": [
+        "param-case"
+      ],
+      "purpose": "diagnosis",
+      "prompt": "$mx^2+2x-3=0$ 在 $m=0$ 时是什么情况？",
+      "options": [
+        "一个实根",
+        "两个实根",
+        "没有实根",
+        "无穷多根"
+      ],
+      "answer": 0,
+      "explanation": "变为 $2x-3=0$。"
+    },
+    {
+      "id": "param-case-2",
+      "skills": [
+        "param-case"
+      ],
+      "purpose": "diagnosis",
+      "prompt": "$mx^2+2x+1=0$ 有两个不同实根要求什么？",
+      "options": [
+        "$m\\le1$",
+        "$m<1$",
+        "$m<1$ 且 $m\\ne0$",
+        "$m>1$"
+      ],
+      "answer": 2,
+      "explanation": "须同时满足 $m\\ne0$ 和 $4-4m>0$。"
+    },
+    {
+      "id": "param-case-3",
+      "skills": [
+        "param-case"
+      ],
+      "purpose": "practice",
+      "prompt": "$(m-2)x^2+x+1=0$ 恰有一个实根对应哪些 $m$？",
+      "options": [
+        "仅 $2$",
+        "仅 $9/4$",
+        "$0$ 或 $2$",
+        "$2$ 或 $9/4$"
+      ],
+      "answer": 3,
+      "explanation": "先验 $m=2$ 的一次分支，再令 $1-4(m-2)=0$。"
+    },
+    {
+      "id": "param-case-4",
+      "skills": [
+        "param-case"
+      ],
+      "purpose": "retest",
+      "prompt": "$mx^2+4x+4=0$ 没有实根的条件？",
+      "options": [
+        "$m>1$",
+        "$m\\ge1$",
+        "$m<1$",
+        "$m=0$"
+      ],
+      "answer": 0,
+      "explanation": "非零分支 $\\Delta=16-16m<0$，零分支有一个实根。"
+    },
+    {
+      "id": "param-case-5",
+      "skills": [
+        "param-case"
+      ],
+      "purpose": "retest",
+      "prompt": "$mx^2+mx=0$ 在 $m=0$ 时的解集？",
+      "options": [
+        "空集",
+        "$\\{0\\}$",
+        "$\\{-1,0\\}$",
+        "全体实数"
+      ],
+      "answer": 3,
+      "explanation": "退化成恒等式 $0=0$。"
+    }
+  ]
+}

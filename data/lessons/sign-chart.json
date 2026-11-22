@@ -1,0 +1,129 @@
+{
+  "node": {
+    "id": "sign-chart",
+    "subject": "math",
+    "name": "二次不等式符号判断",
+    "parent": "inequality",
+    "definition": "确定二次式的零点和各区间符号，再选出解集。"
+  },
+  "lesson": {
+    "definition": "确定二次式的零点和各区间符号，再选出解集。",
+    "prerequisites": [
+      "factor",
+      "formula"
+    ],
+    "knowledge": [
+      "zeros",
+      "delta"
+    ],
+    "methods": [
+      "sign-route",
+      "square-route"
+    ],
+    "problemTypes": [
+      "sign-problem"
+    ],
+    "foundation": "不同实根切分数轴；首项系数决定两端同号。严格不等式排除零点。",
+    "principle": "若 $a(x-r_1)(x-r_2)$ 中 $r_1<r_2$，中间两个因子异号，外侧两个因子同号。重根对应平方，经过它时符号不改变。",
+    "approach": "先把右边变成 0。可分解时用符号表；无实根或有重根时可配方确认全局符号。",
+    "examples": [
+      {
+        "level": "入门",
+        "prompt": "解 $x^2-x-6<0$。",
+        "solution": "分解为 $(x-3)(x+2)$，仅在 $-2<x<3$ 时异号。"
+      },
+      {
+        "level": "进阶",
+        "prompt": "解 $-2(x-1)^2\\ge0$。",
+        "solution": "整个式子始终非正，只有 $x=1$ 时为 0，所以解集是 $\\{1\\}$。"
+      }
+    ],
+    "error": "记住「大于取两边」却忽略首项系数。先验两端符号，再读要求。",
+    "standard": "能处理首项正负、无实根或重根，以及严格和非严格端点。",
+    "application": "在求函数定义域、比较函数值及讨论参数时，不等式常承担最后的取值筛选。",
+    "source": "AI 辅助原创",
+    "review": "待教师复审"
+  },
+  "questions": [
+    {
+      "id": "sign-chart-1",
+      "skills": [
+        "sign-chart"
+      ],
+      "purpose": "diagnosis",
+      "prompt": "$(x-1)(x-4)<0$ 的解集？",
+      "options": [
+        "$(1,4)$",
+        "$[1,4]$",
+        "$x<1$ 或 $x>4$",
+        "空集"
+      ],
+      "answer": 0,
+      "explanation": "两零点之间，两个因子异号。"
+    },
+    {
+      "id": "sign-chart-2",
+      "skills": [
+        "sign-chart"
+      ],
+      "purpose": "diagnosis",
+      "prompt": "$-(x+2)(x-3)>0$ 的解集？",
+      "options": [
+        "$x<-2$ 或 $x>3$",
+        "$(-2,3)$",
+        "$[-2,3]$",
+        "全体实数"
+      ],
+      "answer": 1,
+      "explanation": "区间内乘积为负，再乘负号。"
+    },
+    {
+      "id": "sign-chart-3",
+      "skills": [
+        "sign-chart"
+      ],
+      "purpose": "practice",
+      "prompt": "$(x-2)^2\\le0$ 的解集？",
+      "options": [
+        "全体实数",
+        "空集",
+        "$\\{2\\}$",
+        "$(-\\infty,2]$"
+      ],
+      "answer": 2,
+      "explanation": "平方非负，仅零点可取。"
+    },
+    {
+      "id": "sign-chart-4",
+      "skills": [
+        "sign-chart"
+      ],
+      "purpose": "retest",
+      "prompt": "$x^2+2x+2>0$ 的解集？",
+      "options": [
+        "空集",
+        "$x>-1$",
+        "$x<-1$",
+        "全体实数"
+      ],
+      "answer": 3,
+      "explanation": "配方为 $(x+1)^2+1$。"
+    },
+    {
+      "id": "sign-chart-5",
+      "skills": [
+        "sign-chart"
+      ],
+      "purpose": "retest",
+      "prompt": "$(y+3)(y-2)\\ge0$ 的解集？",
+      "options": [
+        "$y\\le-3$ 或 $y\\ge2$",
+        "$-3\\le y\\le2$",
+        "$y<-3$ 或 $y>2$",
+        "$-3<y<2$"
+      ],
+      "answer": 0,
+      "explanation": "外侧非负，等号包括零点。"
+    }
+  ]
+}

@@ -1,0 +1,128 @@
+{
+  "node": {
+    "id": "bounded-inference",
+    "subject": "english",
+    "name": "用证据约束推断",
+    "parent": "inference",
+    "definition": "区分直接陈述、强支持的推断和仅有可能的猜测。"
+  },
+  "lesson": {
+    "definition": "区分直接陈述、强支持的推断和仅有可能的猜测。",
+    "prerequisites": [
+      "cross-paragraph",
+      "logic"
+    ],
+    "knowledge": [
+      "text-scope"
+    ],
+    "methods": [
+      "evidence",
+      "bound"
+    ],
+    "problemTypes": [
+      "inference-type"
+    ],
+    "foundation": "阅读推断允许补足最少量的一般常识。频率、可能性与范围应与原文匹配。",
+    "principle": "若证据在成立的同时选项可以明显不成立，选项就缺乏充分支持。遇到现实中可能发生的事，检查文本是否给证据。",
+    "approach": "先把事实和推断分开写，用最少步骤连接。排查一定、所有、唯一等扩大措辞。",
+    "examples": [
+      {
+        "level": "入门",
+        "prompt": "Passengers came in with wet coats and folded umbrellas. 可推断什么？",
+        "solution": "很可能外面刚下过雨。证据支持概率判断，不能确定下雨持续多久。"
+      },
+      {
+        "level": "进阶",
+        "prompt": "Only two repairs were needed this year, down from twelve last year. 可推断什么？",
+        "solution": "今年维修需求比去年少。没有费用信息，无法比较总成本。"
+      }
+    ],
+    "error": "用个人经验填补证据缺口。尝试构造一个与原文一致但使选项不成立的场景。",
+    "standard": "能指出至少一条直接证据，解释推断的中间一步及其边界。",
+    "application": "人物意图、作者态度和说明文结论都会考查语气与证据强度。",
+    "source": "AI 辅助原创",
+    "review": "待教师复审"
+  },
+  "questions": [
+    {
+      "id": "bounded-inference-1",
+      "skills": [
+        "bounded-inference"
+      ],
+      "purpose": "diagnosis",
+      "prompt": "Jia checked the clock twice and hurried toward the only bus stop. Which is best supported?",
+      "options": [
+        "Jia may be worried about missing a bus.",
+        "Jia dislikes clocks.",
+        "The bus has already left.",
+        "Jia always arrives late."
+      ],
+      "answer": 0,
+      "explanation": "看时间和赶往车站支持「可能担心」，不证明迟到。"
+    },
+    {
+      "id": "bounded-inference-2",
+      "skills": [
+        "bounded-inference"
+      ],
+      "purpose": "diagnosis",
+      "prompt": "Sales rose after the store extended its hours, but an ad ran at the same time. What is safe to infer?",
+      "options": [
+        "Hours alone caused the rise.",
+        "Two changes coincided with higher sales.",
+        "The ad failed.",
+        "Sales will keep rising."
+      ],
+      "answer": 1,
+      "explanation": "文章只给同时出现，两个因素的独立作用未知。"
+    },
+    {
+      "id": "bounded-inference-3",
+      "skills": [
+        "bounded-inference"
+      ],
+      "purpose": "practice",
+      "prompt": "Some birds avoided the illuminated area. 哪项有据？",
+      "options": [
+        "灯杀死所有鸟",
+        "所有鸟都回巢",
+        "至少部分鸟没有进入亮区",
+        "光没有任何影响"
+      ],
+      "answer": 2,
+      "explanation": "some 表至少一部分，避免进入是对应行为。"
+    },
+    {
+      "id": "bounded-inference-4",
+      "skills": [
+        "bounded-inference"
+      ],
+      "purpose": "retest",
+      "prompt": "The hill path reopened after six weeks of repairs. 哪项可确认？",
+      "options": [
+        "修理一定很贵",
+        "道路比从前宽",
+        "六月开始施工",
+        "修理阶段先于重新开放"
+      ],
+      "answer": 3,
+      "explanation": "after 建立事件的先后关系。"
+    },
+    {
+      "id": "bounded-inference-5",
+      "skills": [
+        "bounded-inference"
+      ],
+      "purpose": "retest",
+      "prompt": "A survey in one school found that most pupils there walked to class. 哪项有据？",
+      "options": [
+        "该校受访学生多数步行",
+        "全省多数学生步行",
+        "只有小学学生步行",
+        "步行时间短于乘车"
+      ],
+      "answer": 0,
+      "explanation": "证据只覆盖一所学校。"
+    }
+  ]
+}

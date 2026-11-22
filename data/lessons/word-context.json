@@ -1,0 +1,127 @@
+{
+  "node": {
+    "id": "word-context",
+    "subject": "english",
+    "name": "用上下文推断生词",
+    "parent": "vocabulary",
+    "definition": "借助定义、例子、对比或结果推断陌生词的大致义。"
+  },
+  "lesson": {
+    "definition": "借助定义、例子、对比或结果推断陌生词的大致义。",
+    "prerequisites": [
+      "polysemy"
+    ],
+    "knowledge": [
+      "context",
+      "cohesion"
+    ],
+    "methods": [
+      "evidence"
+    ],
+    "problemTypes": [
+      "word-meaning"
+    ],
+    "foundation": "词义题的证据可能在破折号、释义从句、举例和转折中。先找线索再概括。",
+    "principle": "定义线索能直接等义。对比只提供语义方向，需结合对象和后文约束，避免推得过精细。",
+    "approach": "先圈陌生词修饰的对象，再找可替换词，最后检查句子前后是否连贯。",
+    "examples": [
+      {
+        "level": "入门",
+        "prompt": "The room was dim: only one small lamp was on. dim 指？",
+        "solution": "冒号后只亮了一盏小灯，说明房间光线不足。"
+      },
+      {
+        "level": "进阶",
+        "prompt": "Unlike the flimsy paper cover, the plastic cover remained firm after repeated use. flimsy 指？",
+        "solution": "由 unlike 和 remained firm 推出纸封面偏薄弱；并无证据说明它昂贵或不能防水。"
+      }
+    ],
+    "error": "由一个情绪词猜测全文，忽略被修饰对象。把修饰关系和线索句一起复述。",
+    "standard": "面对陌生词能指出线索类型，推断适度词义并排除至少一个不合语境的选项。",
+    "application": "科技说明文里的术语通常能通过定义或用途得到足够的阅读解释。",
+    "source": "AI 辅助原创",
+    "review": "待教师复审"
+  },
+  "questions": [
+    {
+      "id": "word-context-1",
+      "skills": [
+        "word-context"
+      ],
+      "purpose": "diagnosis",
+      "prompt": "The device is portable, so two pupils can carry it between rooms. portable 指？",
+      "options": [
+        "可携带",
+        "昂贵",
+        "怕潮",
+        "不可移动"
+      ],
+      "answer": 0,
+      "explanation": "后半句给出能搬动的结果。"
+    },
+    {
+      "id": "word-context-2",
+      "skills": [
+        "word-context"
+      ],
+      "purpose": "diagnosis",
+      "prompt": "The material is porous: water passes through its tiny holes. porous 指？",
+      "options": [
+        "坚硬",
+        "多孔",
+        "透明",
+        "耐热"
+      ],
+      "answer": 1,
+      "explanation": "冒号后直接解释细孔。"
+    },
+    {
+      "id": "word-context-3",
+      "skills": [
+        "word-context"
+      ],
+      "purpose": "practice",
+      "prompt": "The path was slippery; several walkers lost their footing. slippery 指？",
+      "options": [
+        "平坦",
+        "安静",
+        "光滑易滑倒",
+        "狭窄"
+      ],
+      "answer": 2,
+      "explanation": "后半句说明多人滑倒或失去站稳能力。"
+    },
+    {
+      "id": "word-context-4",
+      "skills": [
+        "word-context"
+      ],
+      "purpose": "retest",
+      "prompt": "Unlike the main hall, the annex is small and was added to the side of the building later. annex 指？",
+      "options": [
+        "楼顶",
+        "主厅",
+        "空地",
+        "附楼"
+      ],
+      "answer": 3,
+      "explanation": "位置、大小和增建时间共同约束。"
+    },
+    {
+      "id": "word-context-5",
+      "skills": [
+        "word-context"
+      ],
+      "purpose": "retest",
+      "prompt": "The instructions were ambiguous, so builders read them in two different ways. ambiguous 指？",
+      "options": [
+        "有歧义",
+        "很短",
+        "急迫",
+        "精确"
+      ],
+      "answer": 0,
+      "explanation": "不同读法说明可以有多种理解。"
+    }
+  ]
+}

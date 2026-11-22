@@ -1,0 +1,124 @@
+{
+  "node": {
+    "id": "polysemy",
+    "subject": "english",
+    "name": "熟词生义",
+    "parent": "vocabulary",
+    "definition": "从搭配和事件关系判断熟悉词在当前文本里的含义。"
+  },
+  "lesson": {
+    "definition": "从搭配和事件关系判断熟悉词在当前文本里的含义。",
+    "prerequisites": [],
+    "knowledge": [
+      "context"
+    ],
+    "methods": [
+      "replace"
+    ],
+    "problemTypes": [
+      "word-meaning"
+    ],
+    "foundation": "同一个词可有多个词义。词性、主语和宾语的类型会限制可用解释。",
+    "principle": "把备选义代入原句，再检查所得意思是否能解释行为、动机和结果。最常见的字典义只是候选。",
+    "approach": "优先看目标词搭配。上下文较长时找到紧邻的因果或例证，再用释义回填。",
+    "examples": [
+      {
+        "level": "入门",
+        "prompt": "The library runs a free coding club on Fridays. 这里 runs 的意思？",
+        "solution": "宾语是俱乐部，主语为图书馆，句子说每周运营活动，因此是 organizes。"
+      },
+      {
+        "level": "进阶",
+        "prompt": "The new fabric holds heat well, so the makers use it in winter jackets. 如何解释 holds？",
+        "solution": "后半句说明用作冬装，布料使热量较少散失，因此是 retains。"
+      }
+    ],
+    "error": "见到 run 就翻译为跑步。先识别动词的宾语，再用其他选项解释上下文。",
+    "standard": "能用至少一个搭配线索和一句语义复述解释选项。",
+    "application": "说明文常用熟悉词指较专门的功能，例如 address a problem 表示处理问题。",
+    "source": "AI 辅助原创",
+    "review": "待教师复审"
+  },
+  "questions": [
+    {
+      "id": "polysemy-1",
+      "skills": [
+        "polysemy"
+      ],
+      "purpose": "diagnosis",
+      "prompt": "Mia can spare ten minutes before the bus arrives. spare 指？",
+      "options": [
+        "保存起来",
+        "抽出",
+        "修好",
+        "放弃"
+      ],
+      "answer": 1,
+      "explanation": "宾语是时间，语境说上车前能挤出十分钟。"
+    },
+    {
+      "id": "polysemy-2",
+      "skills": [
+        "polysemy"
+      ],
+      "purpose": "diagnosis",
+      "prompt": "The guide pointed to the spring feeding the stream. spring 指？",
+      "options": [
+        "春天",
+        "弹簧",
+        "泉水",
+        "跳跃"
+      ],
+      "answer": 2,
+      "explanation": "feeding the stream 表示给小溪供水。"
+    },
+    {
+      "id": "polysemy-3",
+      "skills": [
+        "polysemy"
+      ],
+      "purpose": "practice",
+      "prompt": "The school will stage a short play in May. stage 指？",
+      "options": [
+        "演出",
+        "测量",
+        "修复",
+        "分类"
+      ],
+      "answer": 0,
+      "explanation": "宾语 a short play 和时间说明是安排演出。"
+    },
+    {
+      "id": "polysemy-4",
+      "skills": [
+        "polysemy"
+      ],
+      "purpose": "retest",
+      "prompt": "The battery can power the lamp for six hours. power 指？",
+      "options": [
+        "称量",
+        "安装",
+        "关掉",
+        "供电"
+      ],
+      "answer": 3,
+      "explanation": "电池给灯提供能量。"
+    },
+    {
+      "id": "polysemy-5",
+      "skills": [
+        "polysemy"
+      ],
+      "purpose": "retest",
+      "prompt": "The report addresses why some trees survived the drought. addresses 指？",
+      "options": [
+        "写下地址",
+        "探讨",
+        "搬迁",
+        "提醒"
+      ],
+      "answer": 1,
+      "explanation": "宾语是一个待解释的问题。"
+    }
+  ]
+}

@@ -1,0 +1,128 @@
+{
+  "node": {
+    "id": "root-signs",
+    "subject": "math",
+    "name": "利用和积判断根的符号",
+    "parent": "parametric",
+    "definition": "把同号、异号或相对阈值的实根条件转化为和积关系。"
+  },
+  "lesson": {
+    "definition": "把同号、异号或相对阈值的实根条件转化为和积关系。",
+    "prerequisites": [
+      "vieta",
+      "param-case"
+    ],
+    "knowledge": [
+      "delta"
+    ],
+    "methods": [
+      "parameter-route",
+      "vieta-route"
+    ],
+    "problemTypes": [
+      "parameter-problem"
+    ],
+    "foundation": "对实根 $u,v$，积小于零当且仅当异号；积大于零时两根同号，和为正则均正。",
+    "principle": "要比较两根与阈值 $k$，改用 $u-k,v-k$，和为 $u+v-2k$，积为 $uv-k(u+v)+k^2$。",
+    "approach": "先定是否允许重根，再检查零根与区间端点。异号时负积已确保不能是相同实根；用系数推出异号时可显式验判别式。",
+    "examples": [
+      {
+        "level": "入门",
+        "prompt": "判断 $x^2+3x+2=0$ 两根符号。",
+        "solution": "判别式为 1，积 2 为正，和 $-3$ 为负，两根均负。"
+      },
+      {
+        "level": "进阶",
+        "prompt": "求 $x^2-6x+m=0$ 两根都大于 1（允许重根）的条件。",
+        "solution": "令 $x=y+1$，得 $y^2-4y+m-5=0$。和 4 为正，积要求 $m>5$；判别式要求 $m\\le9$，故 $5<m\\le9$。"
+      }
+    ],
+    "error": "仅用和为正判断两根为正，忽略异号可能。再查积，最后检查实根存在性。",
+    "standard": "能用和积、判别式和严格端点条件证明两根符号或与单一阈值的关系。",
+    "application": "在含参函数题中先生成交点方程，再把根的位置翻译成对参数的限制。",
+    "source": "AI 辅助原创",
+    "review": "待教师复审"
+  },
+  "questions": [
+    {
+      "id": "root-signs-1",
+      "skills": [
+        "root-signs"
+      ],
+      "purpose": "diagnosis",
+      "prompt": "$t^2-t-6=0$ 两根符号如何？",
+      "options": [
+        "同为正",
+        "同为负",
+        "异号",
+        "有一个为零"
+      ],
+      "answer": 2,
+      "explanation": "积为 $-6$。"
+    },
+    {
+      "id": "root-signs-2",
+      "skills": [
+        "root-signs"
+      ],
+      "purpose": "diagnosis",
+      "prompt": "$x^2-4x+m=0$ 两个不同实根均正时 $m$ 的范围？",
+      "options": [
+        "$0<m<4$",
+        "$0\\le m<4$",
+        "$0<m\\le4$",
+        "$m<4$"
+      ],
+      "answer": 0,
+      "explanation": "根和为 4，积为 $m$，判别式须严格为正。"
+    },
+    {
+      "id": "root-signs-3",
+      "skills": [
+        "root-signs"
+      ],
+      "purpose": "practice",
+      "prompt": "$x^2-7x+12=0$ 两根均大于 2 吗？",
+      "options": [
+        "是",
+        "只有一个大于 2",
+        "都等于 2",
+        "都小于 2"
+      ],
+      "answer": 0,
+      "explanation": "换元 $x=y+2$ 得 $y^2-3y+2=0$，实根同为正。"
+    },
+    {
+      "id": "root-signs-4",
+      "skills": [
+        "root-signs"
+      ],
+      "purpose": "retest",
+      "prompt": "$y^2+2y-8=0$ 的根有什么特点？",
+      "options": [
+        "两负",
+        "异号",
+        "两正",
+        "一根为零"
+      ],
+      "answer": 1,
+      "explanation": "乘积为负。"
+    },
+    {
+      "id": "root-signs-5",
+      "skills": [
+        "root-signs"
+      ],
+      "purpose": "retest",
+      "prompt": "$x^2-8x+m=0$ 两根均大于 2（可相同）的条件？",
+      "options": [
+        "$m>12$",
+        "$12\\le m\\le16$",
+        "$12<m\\le16$",
+        "$12<m<16$"
+      ],
+      "answer": 2,
+      "explanation": "设 $x=y+2$，新方程 $y^2-4y+m-12=0$，积严格正且判别式非负。"
+    }
+  ]
+}

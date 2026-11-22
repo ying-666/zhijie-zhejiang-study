@@ -1,0 +1,126 @@
+{
+  "node": {
+    "id": "zero-product",
+    "subject": "math",
+    "name": "因式分解法解方程",
+    "parent": "quadratic",
+    "definition": "把方程变到乘积等于零，再分别求各因子的零点。"
+  },
+  "lesson": {
+    "definition": "把方程变到乘积等于零，再分别求各因子的零点。",
+    "prerequisites": [
+      "factor"
+    ],
+    "knowledge": [
+      "zeros"
+    ],
+    "methods": [
+      "factor-route"
+    ],
+    "problemTypes": [
+      "root-problem"
+    ],
+    "foundation": "实数乘积为零当且仅当至少一个因子为零。先把右端移到零，再选分解方式。",
+    "principle": "若 $ab=0$ 且 $a\\ne0$，两边除以 $a$ 得 $b=0$；若 $a=0$，乘积本来为零。",
+    "approach": "有公因式就先提取；整系数二次式明显可分解时优先用此法。分解困难时用公式法。",
+    "examples": [
+      {
+        "level": "入门",
+        "prompt": "解 $x^2=5x$。",
+        "solution": "移项并分解为 $x(x-5)=0$，得 $x=0$ 或 $x=5$。"
+      },
+      {
+        "level": "进阶",
+        "prompt": "解 $x(x+2)=8$。",
+        "solution": "先移项得 $x^2+2x-8=0$，分解成 $(x+4)(x-2)=0$，得到 $-4,2$。"
+      }
+    ],
+    "error": "两边直接除以 $x$ 会丢掉零根。先把式子写成零乘积。",
+    "standard": "能从原式列全解集，解释移项与取零因子为什么不引入多余根。",
+    "application": "函数交点问题可通过比较表达式并求差的零点解决。",
+    "source": "AI 辅助原创",
+    "review": "待教师复审"
+  },
+  "questions": [
+    {
+      "id": "zero-product-1",
+      "skills": [
+        "zero-product"
+      ],
+      "purpose": "diagnosis",
+      "prompt": "$x^2=7x$ 的解集？",
+      "options": [
+        "$\\{7\\}$",
+        "$\\{0,7\\}$",
+        "$\\{0,-7\\}$",
+        "$\\{0\\}$"
+      ],
+      "answer": 1,
+      "explanation": "分解得 $x(x-7)=0$。"
+    },
+    {
+      "id": "zero-product-2",
+      "skills": [
+        "zero-product"
+      ],
+      "purpose": "diagnosis",
+      "prompt": "$(x-1)(x+4)=0$ 的两根是？",
+      "options": [
+        "$-1,4$",
+        "$-1,-4$",
+        "$1,-4$",
+        "$1,4$"
+      ],
+      "answer": 2,
+      "explanation": "分别令两个因子为零。"
+    },
+    {
+      "id": "zero-product-3",
+      "skills": [
+        "zero-product"
+      ],
+      "purpose": "practice",
+      "prompt": "$x(x-3)=10$ 的解是什么？",
+      "options": [
+        "$2,-5$",
+        "$5,2$",
+        "$0,3$",
+        "$5,-2$"
+      ],
+      "answer": 3,
+      "explanation": "先写成 $x^2-3x-10=(x-5)(x+2)=0$。"
+    },
+    {
+      "id": "zero-product-4",
+      "skills": [
+        "zero-product"
+      ],
+      "purpose": "retest",
+      "prompt": "解 $3y^2-12y=0$。",
+      "options": [
+        "$0,4$",
+        "$4$",
+        "$0,-4$",
+        "$0,12$"
+      ],
+      "answer": 0,
+      "explanation": "提取 $3y$，零点还包括 $y=0$。"
+    },
+    {
+      "id": "zero-product-5",
+      "skills": [
+        "zero-product"
+      ],
+      "purpose": "retest",
+      "prompt": "解 $(t+2)^2=9$。",
+      "options": [
+        "$t=1$",
+        "$t=1,-5$",
+        "$t=5,-1$",
+        "$t=1,5$"
+      ],
+      "answer": 1,
+      "explanation": "移项为 $(t-1)(t+5)=0$。"
+    }
+  ]
+}
